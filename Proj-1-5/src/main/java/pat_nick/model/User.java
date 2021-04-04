@@ -3,8 +3,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQueries({@NamedQuery(name="getByUsername", query="from User where id = :id"),
-        @NamedQuery(name="getAllUsers", query = "from User")})
+@NamedQueries({@NamedQuery(name="getByUsername", query="from User where username = :username"),
+                @NamedQuery(name="getAllUsers", query = "from User"),
+                @NamedQuery(name="getByUserId", query = "from User where id = :id")})
 @Entity(name="User")
 @Table(name = "ers_user")
 public class User {
@@ -164,6 +165,7 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname="
-                + firstname + ", lastname=" + lastname + ", email=" + email + ", role_id=" + role_id + "]";
+                + firstname + ", lastname=" + lastname + ", email=" + email + ", role_id=" + role_id + ", " +
+                "reimbursements= " + reimbursements + "]";
     }
 }

@@ -1,21 +1,15 @@
 package pat_nick.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import pat_nick.model.User;
 import org.apache.log4j.Logger;
 
 import org.hibernate.query.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 
 /*
@@ -70,7 +64,7 @@ public class UserDao implements GenericDao <User> {
         User u = null;
         Session session = factory.openSession();
         session.getTransaction().begin();
-        u = session.get(User.class, id);
+
         session.close();
         return u;
     }
@@ -110,7 +104,7 @@ public class UserDao implements GenericDao <User> {
         User u = null;
         session.getTransaction().begin();
         Query<User> query = session.createNamedQuery("getByUsername", User.class);
-        query.setParameter(username, "username");
+        query.setParameter("username", username);
         u = query.getSingleResult();
         session.close();
         return u;

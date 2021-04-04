@@ -45,12 +45,9 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
 
         Session session = factory.openSession();
 
-        Query<Reimbursement> query =
-                session.createNamedQuery("getAllReimbursements", Reimbursement.class);
+        Query<Reimbursement> query = session.createNamedQuery("getAllReimbursements", Reimbursement.class);
 
-        List<Reimbursement> result =
-                query.getResultList();
-
+        List<Reimbursement> result = query.getResultList();
         session.close();
 
         return result;
