@@ -6,7 +6,7 @@ import java.util.List;
 @NamedQueries({@NamedQuery(name="getByUsername", query="from User where id = :id"),
         @NamedQuery(name="getAllUsers", query = "from User")})
 @Entity(name="User")
-@Table(name = "ers_users")
+@Table(name = "ers_user")
 public class User {
     @Id
     @GeneratedValue
@@ -25,6 +25,7 @@ public class User {
     private int role_id;
 
     @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER)
     private List<Reimbursement> reimbursements;
