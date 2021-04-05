@@ -1,5 +1,8 @@
 package pat_nick.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.sql.Timestamp;
 import javax.persistence.*;
 
@@ -33,6 +36,7 @@ public class Reimbursement {
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     public Reimbursement(float amount, Timestamp submitted, Timestamp resolved, String description, int author, int resolver, int status_id, int type_id) {

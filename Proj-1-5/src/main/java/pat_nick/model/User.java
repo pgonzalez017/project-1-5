@@ -1,11 +1,13 @@
 package pat_nick.model;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @NamedQueries({@NamedQuery(name="getByUsername", query="from User where username = :username"),
-                @NamedQuery(name="getAllUsers", query = "from User"),
-                @NamedQuery(name="getByUserId", query = "from User where id = :id")})
+                @NamedQuery(name="getAllUsers", query = "from User")})
 @Entity(name="User")
 @Table(name = "ers_user")
 public class User {
@@ -29,6 +31,7 @@ public class User {
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Reimbursement> reimbursements;
 
     public User(String username, String password, String firstname, String lastname, String email, int role_id) {
