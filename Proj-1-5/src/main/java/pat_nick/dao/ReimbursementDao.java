@@ -1,22 +1,10 @@
 package pat_nick.dao;
 
-import java.sql.Array;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import pat_nick.model.Reimbursement;
-//import com.project1.util.ConnectionUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -44,12 +32,10 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
     public List<Reimbursement> getList() {
 
         Session session = factory.openSession();
-
+        session.getTransaction().begin();
         Query<Reimbursement> query = session.createNamedQuery("getAllReimbursements", Reimbursement.class);
-
         List<Reimbursement> result = query.getResultList();
         session.close();
-
         return result;
     }
 
@@ -106,6 +92,7 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
         Session session = factory.openSession();
         session.getTransaction().begin();
         Query<Reimbursement> query = session.createNamedQuery("getAllReimbursementsByUserId", Reimbursement.class);
+        query.setParameter("user_id", id);
         List<Reimbursement> result = query.getResultList();
         session.close();
         return result;
@@ -141,13 +128,9 @@ public class ReimbursementDao implements GenericDao<Reimbursement> {
     public void insert(Reimbursement r) {
 
         Session session = factory.openSession();
-
         session.beginTransaction();
-
         session.persist(r);
-
         session.getTransaction().commit();
-
         session.close();
 
 

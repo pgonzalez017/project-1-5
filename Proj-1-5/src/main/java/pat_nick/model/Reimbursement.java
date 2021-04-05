@@ -9,7 +9,7 @@ import javax.persistence.*;
 // TODO: Gotta add the update list named query to this
 @NamedQueries({@NamedQuery(name="getAllReimbursements", query = "from Reimbursement"),
         @NamedQuery(name="getReimbursementById", query = "from Reimbursement where id = :id"),
-        @NamedQuery(name="getAllReimbursementsByUserId", query = "from Reimbursement where author = :author")
+        @NamedQuery(name="getAllReimbursementsByUserId", query = "from Reimbursement where user_id = :user_id")
 })
 @Entity(name = "Reimbursement")
 @Table(name = "ers_reimbursement")
