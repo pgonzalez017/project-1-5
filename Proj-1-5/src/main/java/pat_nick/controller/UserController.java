@@ -23,6 +23,8 @@ public class UserController {
 
         Gson gson = new Gson();
 
+//        String json = gson.toJson(u);
+
         res.getWriter().println(gson.toJson(u));
 
     }

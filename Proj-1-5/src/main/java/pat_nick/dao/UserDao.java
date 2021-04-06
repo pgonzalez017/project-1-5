@@ -64,9 +64,7 @@ public class UserDao implements GenericDao <User> {
         User u = null;
         Session session = factory.openSession();
         session.getTransaction().begin();
-        System.out.println("Hello");
         u = (User) session.get(User.class, id);
-        System.out.println("World");
         session.getTransaction().commit();
         session.close();
         return u;
